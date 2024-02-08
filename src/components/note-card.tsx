@@ -21,7 +21,7 @@ export function NoteCard({ note }: NoteCardProps) {
                     <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                     <span className="text-sm font-medium text-slate-300">
                         {
-                            note.date.toISOString()
+                            formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })
                         }
                     </span>
                     <p className="text-sm leading-6 text-slate-400">
@@ -46,7 +46,7 @@ export function NoteCard({ note }: NoteCardProps) {
                         >
                             <span className="text-sm font-medium text-slate-300">
                                 {
-                                    formatDistanceToNow(note.date.toISOString(), { locale: ptBR, addSuffix: true })
+                                    formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })
                                 }
                             </span>
                             <p className="text-sm leading-6 text-slate-400">
