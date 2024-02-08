@@ -35,11 +35,22 @@ export function App() {
 		localStorage.setItem('notes', JSON.stringify(notesArray))
 	}
 
+	function onNoteDeleted(id: string){
+		const notesArray = notes.filter(note => {
+			return note.id !== id
+		})
+
+		setNotes(notesArray)
+		localStorage.setItem('notes', JSON.stringify(notesArray))
+	}
+
 	function handleSearch(event: ChangeEvent<HTMLInputElement>) {
 		const query = event.target.value
 
 		setSearch(query)
 	}
+
+	
 
 	const filteredNotes = search !== ''
 		? notes.filter(note => note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase().trim()))
@@ -47,7 +58,7 @@ export function App() {
 
 
 	return (
-		<div className="mx-auto max-w-6xl my-12 space-y-6">
+		<div className="mx-auto max-w-6xl my-12 space-y-6 px-5">
 			<img src={Logo} alt="nlw expert" />
 			<form
 				className="w-full"
@@ -63,7 +74,7 @@ export function App() {
 			<div className="h-px bg-slate-700" />
 
 			<main
-				className="grid grid-cols-3 auto-rows-[250px] gap-6"
+				className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 auto-rows-[250px] gap-6"
 			>
 				<NewNoteCard onNoteCreated={onNoteCreated} />
 
@@ -72,6 +83,7 @@ export function App() {
 						return <NoteCard
 							note={note}
 							key={note.id}
+							onNoteDeleted={onNoteDeleted}
 						/>
 					})
 				}
